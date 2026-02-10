@@ -1,0 +1,272 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hello-py"
+description = "A modern Python package template."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [
+    { name = "Anastasios Kaltakis" },
+]
+keywords = ["template", "python"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+    "Typing :: Typed",
+]
+dynamic = ["version"]
+dependencies = []
+
+[project.urls]
+Documentation = "https://hello-py.readthedocs.io/"
+Repository = "https://github.com/anaskalt/hello-py"
+Issues = "https://github.com/anaskalt/hello-py/issues"
+Changelog = "https://github.com/anaskalt/hello-py/blob/main/CHANGELOG.md"
+Security = "https://github.com/anaskalt/hello-py/blob/main/SECURITY.md"
+
+# ── Dependency Groups (PEP 735) ──────────────────────────────────────────────
+
+[dependency-groups]
+test = [
+    "pytest>=9.0",
+    "pytest-cov>=6.0",
+    "pytest-randomly>=3.15",
+    "pytest-xdist>=3.5",
+]
+docs = [
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.27",
+    "mkdocs-gen-files>=0.5",
+    "mkdocs-literate-nav>=0.6",
+    "mkdocs-section-index>=0.3",
+]
+lint = [
+    "ruff>=0.15",
+    "mypy>=1.19",
+    "bandit>=1.9",
+    "uv-secure>=0.15",
+]
+dev = [
+    { include-group = "test" },
+    { include-group = "docs" },
+    { include-group = "lint" },
+    "pre-commit>=4.0",
+]
+
+# ── uv ───────────────────────────────────────────────────────────────────────
+
+[tool.uv]
+default-groups = ["dev"]
+
+# ── Hatch ────────────────────────────────────────────────────────────────────
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+fallback_version = "0.0.0"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/hello_py"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hello_py"]
+
+# ── Ruff ─────────────────────────────────────────────────────────────────────
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+src = ["src", "tests"]
+extend-exclude = ["docs"]
+
+[tool.ruff.lint]
+select = [
+    "F",      # pyflakes
+    "E", "W", # pycodestyle
+    "C90",    # mccabe
+    "I",      # isort
+    "N",      # pep8-naming
+    "D",      # pydocstyle
+    "UP",     # pyupgrade
+    "YTT",    # flake8-2020
+    "ANN",    # flake8-annotations
+    "ASYNC",  # flake8-async
+    "S",      # flake8-bandit
+    "BLE",    # flake8-blind-except
+    "B",      # flake8-bugbear
+    "A",      # flake8-builtins
+    "COM",    # flake8-commas
+    "C4",     # flake8-comprehensions
+    "DTZ",    # flake8-datetimez
+    "T10",    # flake8-debugger
+    "T20",    # flake8-print
+    "EM",     # flake8-errmsg
+    "EXE",    # flake8-executable
+    "FA",     # flake8-future-annotations
+    "ISC",    # flake8-implicit-str-concat
+    "ICN",    # flake8-import-conventions
+    "PIE",    # flake8-pie
+    "PT",     # flake8-pytest-style
+    "Q",      # flake8-quotes
+    "RSE",    # flake8-raise
+    "RET",    # flake8-return
+    "SLF",    # flake8-self
+    "SLOT",   # flake8-slots
+    "SIM",    # flake8-simplify
+    "TID",    # flake8-tidy-imports
+    "TC",     # flake8-type-checking
+    "INT",    # flake8-gettext
+    "ARG",    # flake8-unused-arguments
+    "PTH",    # flake8-use-pathlib
+    "TD",     # flake8-todos
+    "FIX",    # flake8-fixme
+    "PGH",    # pygrep-hooks
+    "PL",     # pylint
+    "TRY",    # tryceratops
+    "FLY",    # flynt
+    "PERF",   # perflint
+    "FURB",   # refurb
+    "LOG",    # flake8-logging
+    "RUF",    # ruff-specific
+]
+ignore = [
+    "ANN401",  # dynamically typed expressions (Any)
+    "COM812",  # trailing comma (formatter conflict)
+    "ISC001",  # implicit string concat (formatter conflict)
+    "D107",    # missing docstring in __init__ (merged into class)
+    "TD003",   # missing issue link for TODO
+    "FIX002",  # line contains TODO
+    "TRY003",  # long exception messages
+    "EM101",   # raw string in exception
+    "EM102",   # f-string in exception
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "ANN",     # annotations not required
+    "D",       # docstrings not required
+    "S101",    # assert is expected
+    "ARG",     # unused arguments (fixtures)
+    "PLR2004", # magic values
+    "T20",     # print() allowed in tests
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["hello_py"]
+force-single-line = true
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+docstring-code-format = true
+
+# ── mypy ─────────────────────────────────────────────────────────────────────
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+warn_unreachable = true
+show_error_codes = true
+enable_error_code = ["ignore-without-code", "redundant-cast", "truthy-bool"]
+exclude = ["docs/"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+# ── pytest ───────────────────────────────────────────────────────────────────
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "src"]
+pythonpath = ["src"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--doctest-modules",
+    "-ra",
+]
+xfail_strict = true
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks integration tests",
+]
+filterwarnings = [
+    "error",
+]
+
+# ── coverage ─────────────────────────────────────────────────────────────────
+
+[tool.coverage.run]
+source = ["hello_py"]
+branch = true
+parallel = true
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_empty = true
+fail_under = 80
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.",
+    "raise NotImplementedError",
+    "@overload",
+    "\\.\\.\\.",
+]
+
+[tool.coverage.paths]
+source = [
+    "src/hello_py",
+    "*/site-packages/hello_py",
+]
+
+# ── bandit ───────────────────────────────────────────────────────────────────
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B101"]
+
+# ── uv-secure ────────────────────────────────────────────────────────────────
+
+[tool.uv-secure]
+format = "columns"
+
+# [tool.uv-secure.ignore_packages]
+# Suppress alerts for specific packages when a vulnerability is accepted or
+# does not apply.  Empty list ignores all versions; version specifiers narrow
+# the scope.
+# requests = []                          # ignore all versions
+# urllib = [">=1.0, <2.0"]               # ignore only 1.x
+# jinja2 = [">=0.1, <1.0", "~=2.0"]     # ignore 0.x and 2.x
+
+[tool.uv-secure.vulnerability_criteria]
+# ignore_vulnerabilities = ["VULN-123", "CVE-2024-12345"]
+aliases = false
+desc = false
+check_direct_dependencies_only = false
+
+[tool.uv-secure.maintainability_criteria]
+forbid_yanked = true
+forbid_deprecated = true
+forbid_quarantined = true
