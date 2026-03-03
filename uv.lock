@@ -310,6 +310,15 @@ toml = [
 ]
 
 [[package]]
+name = "cvss"
+version = "3.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a5/f6/1f7d315de23f39bbc32b94bb6b33a1b6124856037bfaa3f8bdb1a49584fa/cvss-3.6.tar.gz", hash = "sha256:f21d18224efcd3c01b44ff1b37dec2e3208d29a6d0ce6c87a599c73c21ee1a99", size = 30047, upload-time = "2025-08-04T10:50:13.753Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/63/6d/fe2c65b94a28ae0481dc254e8cd664b82390069003bea945076d8a445f2b/cvss-3.6-py2.py3-none-any.whl", hash = "sha256:e342c6ad9c7eb69d2aebbbc2768a03cabd57eb947c806e145de5b936219833ea", size = 31154, upload-time = "2025-08-04T10:50:12.328Z" },
+]
+
+[[package]]
 name = "distlib"
 version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1621,6 +1630,15 @@ wheels = [
 ]
 
 [[package]]
+name = "tomlkit"
+version = "0.14.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/c3/af/14b24e41977adb296d6bd1fb59402cf7d60ce364f90c890bd2ec65c43b5a/tomlkit-0.14.0.tar.gz", hash = "sha256:cf00efca415dbd57575befb1f6634c4f42d2d87dbba376128adb42c121b87064", size = 187167, upload-time = "2026-01-13T01:14:53.304Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b5/11/87d6d29fb5d237229d67973a6c9e06e048f01cf4994dee194ab0ea841814/tomlkit-0.14.0-py3-none-any.whl", hash = "sha256:592064ed85b40fa213469f81ac584f67a4f2992509a7c3ea2d632208623a3680", size = 39310, upload-time = "2026-01-13T01:14:51.965Z" },
+]
+
+[[package]]
 name = "typeguard"
 version = "4.4.4"
 source = { registry = "https://pypi.org/simple" }
@@ -1679,10 +1697,11 @@ wheels = [
 
 [[package]]
 name = "uv-secure"
-version = "0.15.4"
+version = "0.17.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
+    { name = "cvss" },
     { name = "httpx" },
     { name = "humanize" },
     { name = "inflect" },
@@ -1692,11 +1711,12 @@ dependencies = [
     { name = "rich" },
     { name = "stamina" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
+    { name = "tomlkit" },
     { name = "typer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/64/f1/253fbc3e9b41a68f7ecc95e8e8144e776353bb9207fbabf1e2b16e8455ef/uv_secure-0.15.4.tar.gz", hash = "sha256:8d52b041a74f1116089842a257177111f27ad0ccb7c819c59c42af225a1a0e92", size = 29563, upload-time = "2025-12-28T12:01:48.749Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/29/bc/b6c395906fcc3aed2e853c2478ef76c83121a9b26a58bd37150144b576e0/uv_secure-0.17.0.tar.gz", hash = "sha256:c379aefa6cdbd2546c6b8da53dfee6db0bc56346dc75a5ff970c4fb01bad42c9", size = 40330, upload-time = "2026-02-28T18:22:50.94Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/10/6b/6edfede227360085da173e21e18c01fc6b5167c6966105fd009aa6b90848/uv_secure-0.15.4-py3-none-any.whl", hash = "sha256:dd5c279d1745f45ac2d560ce8807d8ed4d70f40a88baf92d19f574be8d3b2163", size = 39097, upload-time = "2025-12-28T12:01:47.528Z" },
+    { url = "https://files.pythonhosted.org/packages/df/ad/ecfc35f0f1507094cec57207ca8ce20b85874e6cefdaff918fa5b159036f/uv_secure-0.17.0-py3-none-any.whl", hash = "sha256:1e0dbc471ee52273beee434c41de65670f8e91cea1b325a102624f54c83e2b06", size = 53538, upload-time = "2026-02-28T18:22:49.697Z" },
 ]
 
 [[package]]
